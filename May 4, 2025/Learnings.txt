@@ -1,0 +1,318 @@
+Question:- Information extraction through Search engines, Not Understood?
+
+Answer:-
+
+🔍 What Are Search Engines?
+	A search engine is a software system that helps users find information on the internet by searching through billions of web pages and returning the most relevant results based on a query.
+
+✅ Key Functions of a Search Engine:
+	Crawling – Scans the web to discover new and updated pages.
+	Indexing – Organizes and stores information from those pages in a massive database.
+	Ranking – Sorts results by relevance to your query using complex algorithms.
+	Retrieval – Displays a list of matching results (webpages, images, videos, etc.).
+
+✅ What is "Information Extraction through Search Engines"?
+	Using a search engine (like Google or Bing) to find and extract specific information from web pages, documents, or other online content.
+
+🧠 Think of it as Two Steps:
+Search – You type a question or keyword (e.g., "Who invented the light bulb?")
+Extraction – The system not only shows you links but also tries to pull out the exact answer from the content.
+
+For example: Google might show a box: "Thomas Edison" (This is information extraction!)
+
+🧪 Bonus: In NLP, “Information Extraction” often means: Automatically finding things like names, dates, places, relationships from raw text.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question:- Explain phases of Natural Language Processing?
+
+Answer:- 
+
+Lexical Analysis (Tokenization + Morphological Analysis)
+- Breaks the text into smallest meaningful units, like words, tokens, or phrases. Also analyzes word structure (prefixes, suffixes, roots).
+🧠 Example:
+	Input: “Cats are running.”
+	Lexical analysis →
+		Tokens: ["Cats", "are", "running"]
+		Lemmas: ["cat", "be", "run"]
+		POS tags: ["Noun", "Verb", "Verb"]
+	🔧 Techniques Involved:
+		Tokenization
+		Stemming / Lemmatization
+		Part-of-Speech (POS) tagging
+
+Syntactic Analysis (Parsing / Grammar Checking)
+- Analyzes sentence structure according to grammar rules. Builds a parse tree or syntax tree to show the relationship between words.
+🧠 Example:
+	Sentence: “The cat sits on the mat.”
+	Syntactic analysis identifies that:
+		"The cat" is the subject
+		"sits" is the verb
+		"on the mat" is a prepositional phrase (object of the sentence)
+	🔧 Techniques:
+		Context-Free Grammar (CFG)
+		Dependency Parsing
+		Constituency Parsing
+
+Semantic Analysis (Meaning Extraction)
+- Focuses on the meaning of words and sentences. Tries to understand what the sentence is about.
+🧠 Example:
+	Sentence: “The bank is near the river.”
+	Semantic analysis resolves that "bank" here means riverbank, not a financial institution, using context.
+	🔧 Techniques:
+		Named Entity Recognition (NER)
+		Word Sense Disambiguation
+		Semantic Role Labeling
+
+Pragmatic Analysis (Contextual Meaning)
+- Goes beyond literal meaning to interpret intent, tone, sarcasm, and implication based on real-world context.
+🧠 Example:
+	Sentence: “Can you pass the salt?”
+	Literally, it’s a yes/no question, but pragmatically, it’s a request.
+	🔧 Used in:
+		Chatbots
+		Voice assistants
+		Sentiment analysis
+		Intent detection
+
+Disclosure Integration (Inter-sentence Meaning)
+- Looks at how sentences connect and relate in a paragraph or conversation. Helps maintain context, topic continuity, and coreference resolution (who "he", "she", or "it" refers to).
+🧠 Example:
+	Sentence: “John went to the store. He bought apples.”
+	Discourse analysis figures out that "he" = John and that both sentences are part of one coherent story.
+	🔧 Focus Areas:
+		Coreference resolution
+		Anaphora/cataphora resolution
+		Topic modeling
+
+📘 Example Sentence: "John saw the man with the telescope."
+This sentence is grammatically correct but ambiguous, making it a great example to show how each NLP phase processes it.
+
+🔹 1. Lexical Analysis
+Goal: Break the sentence into tokens and analyze word forms.
+Tokens: ["John", "saw", "the", "man", "with", "the", "telescope"]
+POS tags:
+	John → Proper Noun
+	saw → Verb
+	the → Determiner
+	man → Noun
+	with → Preposition
+	the → Determiner
+	telescope → Noun
+Lemmas:
+	saw → see
+	telescope → telescope (no change)
+🔧 Now the system knows the basic parts of the sentence: nouns, verbs, etc.
+
+🔹 2. Syntactic Analysis
+Goal: Understand the sentence structure (grammar tree).
+Builds a parse tree showing:
+	Subject: John
+	Verb: saw
+	Object: the man with the telescope
+❗️But here's the issue: “with the telescope” can attach to either:
+"saw" → John used a telescope
+"man" → The man had the telescope
+The syntax is ambiguous, and parsing may give multiple valid trees.
+
+🔹 3. Semantic Analysis
+Goal: Understand the meaning of the sentence.
+Looks at possible meanings:
+John used a telescope to see the man.
+John saw a man who had a telescope.
+🧠 This phase detects ambiguity but can’t resolve it alone — it needs context or real-world knowledge.
+
+🔹 4. Pragmatic Analysis
+Goal: Resolve ambiguity using context or real-world understanding.
+If the context was a story where John is an astronomer, the system might infer:
+→ John used the telescope to see.
+If the story was about a suspicious man being watched, it might infer:
+→ The man had the telescope.
+🎯 Pragmatic analysis answers: What is the speaker actually intending to say, given the situation?
+
+🔹 5. Discourse Analysis
+Goal: Interpret this sentence in relation to other sentences (overall context).
+Let’s say it’s in a paragraph:
+“John was out hiking. He brought his telescope. Then, John saw the man with the telescope.”
+Discourse analysis uses previous sentences to figure out:
+→ John brought the telescope, so he likely used it to see the man.
+✅ So now, "with the telescope" refers to John’s instrument, not the man's.
+
+
+
+✅ Summary of the Flow:
+Phase			What it Does			What it Figured Out
+Lexical		Breaks sentence into words	Identified parts of speech
+Syntactic	Analyzes grammar		Found structural ambiguity
+Semantic	Understands meanings		Found two possible interpretations
+Pragmatic	Applies real-world logic	Guesses most likely meaning
+Discourse	Uses surrounding text		Confirms who had the telescope
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: Text normalization requires being conscious of what sort of text is to be normalized and the way it’s to be processed afterwards; there’s no all-purpose normalization procedure.
+
+Answer:- 
+
+The phrase "there’s no all-purpose normalization procedure" means:
+- There is no single method that works for all types of text and situations when it comes to normalizing data.
+
+Why?
+Different kinds of text (like tweets, medical notes, formal essays, or speech transcripts) have different styles, formats, and goals. So the way you clean and prepare the text (normalize it) depends on:
+	The type of data (e.g., social media vs. legal documents),
+	The language used (e.g., slang, abbreviations, formal terms),
+	And what you plan to do after normalizing it (e.g., search, translation, machine learning).
+
+Example:
+	For a search engine, you might want to remove stop words (like "the", "is", "an").
+	For a sentiment analysis task, you might want to keep those same words because they affect meaning.
+So, normalization must be customized to the problem you're solving.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: What is Text Normalization?
+
+Answer:-
+
+Text normalization is the process of converting text into a standard, consistent format so that it can be processed more effectively by computer programs, especially in tasks like text analysis, machine learning, or search.
+
+🔧 It can involve several steps:
+	Lowercasing: "The Quick Brown Fox" → "the quick brown fox"
+	Removing punctuation and special characters: "hello!!!" → "hello"
+	Removing stop words: Common words like “is”, “a”, “the”, which may not add value in certain tasks: "This is a test" → "test"
+	Stemming or Lemmatization: Reduce words to their root form: "running" → "run"
+	Expanding contractions: "don't" → "do not"
+	Removing extra spaces: " too much space " → "too much space"
+
+🚫 So, it's not just about removing unwanted words, but about:
+	Making text uniform,
+	Reducing noise,
+	And preparing it for further analysis or modeling.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: how converting lower or upper helps in text normalization?
+
+Answer:- 
+
+- Great question! Converting text to lowercase (or sometimes uppercase) helps in text normalization by ensuring consistency, which is important when analyzing or comparing words.
+
+🔍 Why it helps:
+Let’s say you have the following sentence: "The weather is Hot but the night is cold."
+Without converting to lowercase:
+	You have "The" and "the" — which are actually the same word but look different to a computer.
+	Similarly, "Hot" and "hot" would be treated as two different words.
+
+✅ After lowercasing: "the weather is hot but the night is cold"
+Now: All versions of a word are treated as one, so your results (e.g., word counts, search, matching) are more accurate and consistent.
+💡 Example use case: If you’re building a chatbot or search engine, you want "Hello", "HELLO", and "hello" to be understood as the same word. Lowercasing takes care of that.
+
+So, converting to lowercase is a simple but powerful way to reduce variation and improve the quality of your text processing.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: Regular Expression - Regex?
+
+Answer:-
+
+re is a built-in Python module, which means it comes with Python by default — you just need to import it, like this: import re
+
+The r in front of a string — like r"\d+" — stands for a "raw string" in Python.
+
+Regular Expressions - special sequence of characters that uses a search pattern to find a string or set of strings.
+		    - It can detect the presence or absence of a text by matching it with a particular pattern, and also can split a pattern into one or more sub patterns.
+
+\ - Used to drop the special meaning of character following it.
+[] - Represent a character class
+^ - matches the beginning
+$ - matches the end
+. - matches any character except newline
+| - means OR (matches with any of the characters separated by it)
+? - matches zero or one occurrence
+* - 0 or more occurences
++ - 1 or more occurences
+{} - indicate the number of occurrences of a preceding regex to match
+() - enclose a group of regex
+
+re.search() - Searches for the first match of the pattern anywhere in the string. Returns a match object (or None if no match is found).
+
+re.findall() - Finds all matches of the pattern in the string. Returns a list of all matches.
+
+Special Sequence in RegEx
+
+\A - Matches if the string begins with the given character
+\b - Matches if the word begins or ends with the given character. \b(string) will check for the beginning of the word and (string)\b will check for the ending of the word
+\B - it is opposite of the \b i.e. the string should not start or end with the given regex.
+\d - matches any decimal digit
+\D - matches any non-digit character, this is equivalent to the set class [^0-9]
+\s - Matches any whitespace character.
+\S - Matches any non-whitespace character.
+\w - Matches any alphanumeric character, this is equivalent to the class [a-zA-Z0-9]
+\W - matches any non-alphanumeric character.
+\Z - matches if the string ends with the given regex.
+
+RegEx Sets - A set is a set of characters inside a pair of square brackets [] with a special meaning
+
+[atx] - a,t or x are present
+[a-h] - lower case character, alphabetically between a and h
+[^atx] - except a,t,x
+[0123] - 0,1,2,3 are present
+[0-9] - digit match from 0 to 9
+[0-7][0-9] - 2 digit with from 00 to 79
+[a-zA-Z] - match for any character alphabetically between a and z, lower and upper
+[+] - in sets +,*,.,|,(),$,{} has no special meaning, so [+] means it returns match for any + character in the string.
+
+Functions in RegEx:-
+
+re.search() - this method either returns None (if the pattern doesn't match), or a re. this method stops after the first match, so this is best suited for testing a regular expression more than extracting data.
+
+re.findall() - returns all non-overlapping matches of pattern in string, as a list of strings. The string is scanned left-to-right, and matches are returned in the order found.
+
+re.compile() - regular expressions are compiled into pattern objects, which have methods for various operations such as searching for any matches or performing string substitutions.
+
+re.split() - Split string by the occurrences of a character or a pattern, upon finding the pattern, the remaining characters from the string are returned as part of the resulting list.
+
+re.sub() - the method returns a string where matched occurences are replaced with the content of replace variable.
+
+re.subn() - subn() is similar to sub() in all ways, except in its way of providing output. It returns a tuple with a count of the total of replacement and the new string rather than just the string.
+
+re.escape() - returns string with all non-alphanumerics backslashed, this is useful if you want to match an arbitrary literal string that may have any expression metacharacters in it.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: what is re.compile in regex?
+
+Answer: compile a regular expression pattern into a regex object — which can then be reused.
+
+
+If you're going to use the same regex pattern multiple times, re.compile() helps:
+	Avoid rewriting the pattern
+	Improve performance (the pattern is compiled once)
+	Make code cleaner and more readable
+
+pattern = re.compile(r'your_pattern')
+
+You can then use:
+	pattern.findall(text)
+	pattern.search(text)
+	pattern.match(text)
+	pattern.sub(replacement, text)
+instead of calling re.findall(...), re.search(...), etc. repeatedly.
+
+Code:- 
+
+import re
+text = "My phone number is 123-456-7890 and 987-654-3210"
+
+# Compile the regex pattern once
+phone_pattern = re.compile(r'\d{3}-\d{3}-\d{4}')
+
+# Use the compiled object
+matches = phone_pattern.findall(text)
+print(matches)
+
+Output:-
+
+['123-456-7890', '987-654-3210']
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
