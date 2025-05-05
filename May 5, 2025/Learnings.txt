@@ -1,0 +1,137 @@
+Question:- Heap vs sorting
+
+Answer:- 
+Heap Approach:
+	Time complexity: 𝑂(𝑛log𝑘)
+	Ideal when: k is much smaller than n
+	Scales well for large input sizes
+
+Full Sort Approach:
+	Time complexity:  O(nlogn)
+	Ideal when: n is small or k is close to n
+	Slower for large arrays because it sorts the entire array even though only k elements are needed.
+
+Example:
+Let’s say: n = 1,000,000 k = 10
+
+Heap:  1,000,000×log10≈3,000,000 ops
+Sort:  1,000,000×log1,000,000≈20,000,000 ops
+
+That's almost 7x slower in this case.
+
+Conclusion:
+✅ Use heap for large arrays and small k
+✅ Sort is fine only for small n or if you need all elements sorted
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: why it is nlogk in priority queue
+
+Answer: 
+
+📌 Time Complexity Breakdown:
+Inserting into a heap takes O(logk) time (since the heap never grows beyond size k).
+You do this for each of the n elements in the array.
+So total time is: n×logk=O(nlogk)
+
+🔍 Why log k instead of log n?
+. Because the maximum heap size is k, not n.
+. Heap operations depend on the number of elements in the heap, not in the array.
+
+Visual Analogy:
+Imagine you're trying to keep the top k tallest students in a classroom of n students:
+. You look at each student one by one (n times).
+. You keep a group of size k, and kick out the shortest person if a taller one comes.
+. Finding the shortest (min-heap root) and removing it takes log k time.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: Why log times in priority queue?
+
+Answer: priority queue is typically implemented using a binary heap
+
+Heap is a complete binary tree (i.e., all levels filled last level left as possible) that maintains the heap property (i.e.,rule that defines order of elements - minHeap,maxHeap)
+
+insertion - placing the new element at the end and bubbling it up to maintain the heap property - takes O(log n) time in the worst case (height of the tree)
+
+deletion - swap the root with the last element, remove the last element, and then heapify down - again O(log n) time.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Learned new algorithm - Quick Select 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: Are there any algorithms that are similar to quick sort?
+
+Answer:-
+1. QuickSelect
+2. IntroSort (Introspective Sort)
+3. Dual-Pivot Quicksort
+4. Three-way Quicksort (Dutch National Flag algorithm)
+5. Quicksort Variants
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: Quick Select - O(n^2) in the worst case, but on average works in O(nlogn) time and performs better than priority queue based algorithm.
+
+Why quick select performs better than priority queue?
+
+Answer: Better because -
+
+1. Lower Constant Factors:- 
+	QuickSelect - inplace (only requires few pointers and swaps)
+	Priority queue - involve dynamic memory management and heapify operations which are more expensive in practice.
+2. Partial Sorting vs Full Maintainance -
+	QuickSelect - focus only on finding the k-th element by partially sorting the array (like Quicksort but only on the necessary half).
+	Priority queue - based methods maintain the top k elements throughout the process, requiring log(k) operations per insert/delete.
+3. Average Time complexity - 
+	QuickSelect - Average case O(n)
+	Priority queue - Always O(nlogk)
+	when k is small or fixed, O(n) is significantly better than O(nlogk)
+4. Better Cache Performance -
+	QuickSelect - access in sequential manner, leading to better cache locality
+	Heaps access memory more randomly due to the tree structure, resulting in more cache misses.
+
+Summary:
+	QuickSelect outperforms heap-based approaches in practice because it does less work, operates in-place and doesn't need to maintain a sorted structure, making it more efficient for selection problems.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: 4th point better cache performance?
+
+Answer: 
+
+What is cache performance?
+	Your computer has a memory hierarchy:
+		. cpu cache (very fast but small)
+		. RAM (larger but slower)
+		. Disk (much larger, very slow)
+Cache performance refers to how efficiently an algorithm uses the CPU cache. Accessing data from cache is much faster than accessing it from RAM.
+
+Why QuickSelect/Quick sort has better cache performance?
+1. Access memory linearly or in nearby locations:
+	. work with continuous arrays
+	. when partition, access elements in sequence or within close proximity
+	. cache-friendly. because once cpu loads one element, nearby elements are often loaded into the cache automatically (called spatial locality).
+2. Fewer jumps in memory:
+	. work in-place, there are fewer random memory accesses.
+	. cache is more effective when access patterns are predictable and localized.
+
+Why Heaps are worse?
+
+1. Non-contiguous memory access:
+	a binary heap stored in an array has parent-child relationships at i,2i+1,2i+2, so accesses jump around the array.
+	these jumps reduce cache hits because the next element needed might not be in the nearby memory block.
+2. Dynamic resizing and memory allocation:
+	heaps often resize when full which may involve copying data to a new memory location, evicting cache lines.
+
+Visual Analogy:
+Image reading a book:
+	. QuickSelect reads line by line - efficient
+	. Heaps read page 1, then jump to page 10, then 5-less efficient
+
+Summary:
+QuickSelect/QuickSort has better cache locality and sequential access patterns leading to faster real-world performance, even if both have similar theoretical time complexities.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
