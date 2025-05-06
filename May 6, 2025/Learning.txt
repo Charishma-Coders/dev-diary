@@ -1,0 +1,101 @@
+Question: What is the use of subword tokenization?
+
+Answer: Subword tokenization is used in natural language processing (NLP) to efficiently handle rare words, misspellings, and morphologically rich languages by breaking words into smaller units called subwords. Here's why it's useful:
+
+1. Handles Out-of-Vocabulary (OOV) Words
+
+Instead of treating an unknown word as a single "unknown" token, subword tokenization breaks it into known smaller pieces. For example:
+
+Unknown word: unhappiness
+
+Subwords: un, happi, ness
+
+
+2. Reduces Vocabulary Size
+
+It allows models to represent language using a smaller set of tokens, which makes training faster and more memory-efficient.
+
+3. Improves Generalization
+
+By learning subword patterns, models can better understand word structures and generalize to similar words, even if they haven’t seen them during training.
+
+4. Supports Multiple Languages
+
+Especially helpful in multilingual models, where the tokenizer can share subwords across languages.
+
+Popular Methods:
+
+Byte Pair Encoding (BPE)
+
+WordPiece (used in BERT)
+
+Unigram Language Model (used in SentencePiece)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: sent_tokenize vs PunktSentenceTokenizer
+
+Answer: 
+
+feature              sent_tokenize                                 PunktSentenceTokenizer
+
+type                   Function                                   Class (Object-oriented)
+Pretrained model       yes (English only)                         yes or can be trained for other languages
+custom training        no                                         yes
+Language support       Limited (default: English)                 Multilingual with training
+Use Case               Quick/simple use                           Advanced/Custom NLP needs
+
+Use sent_tokenize when you need fast English sentence splitting.
+Use PunktSentenceTokenizer when you want custom models, different languages, or more control.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: why nltk.download('punkt_tab') is required for word_tokenize
+
+Answer: yes it is need because word_tokenize undergo 2 stages. 1. Sentence Splitting 2. Words splitting
+
+for sentence splitting internally it used PunktSentenceTokenizer and for word splitting it internally uses TreebankWordTokenizer.
+
+word_tokenize() = PunktSentenceTokenizer + TreebankWordTokenizer
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: TreebankWordTokenizer vs WordPunctTokenizer
+
+Answer:-
+				TreebankWordTokenizer                   WordPunctTokenizer
+Handles Contradictions         Yes ("don't" -> ["do","n't"])       No ("don't" -> ["don","'","t"])
+Keeps Punctuation              Yes                                 Yes
+Granularity                    Medium                              High (more aggressive)
+Linguistically aware           Yes                                 No
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: nltk vs spaCy for tokenization?
+
+Answer: 
+
+1. Accuracy and Language Support
+			NLTK					spaCy
+Tokenization Accuracy   Good for English, rule-based        Excellent, trained on large corpora
+Multilingual Support    Limited (depends on Punkt models)   Strong multilingual models (with built-in tokenizers)
+Handles complex tokens  Basic                               Very good
+
+2. Speed -
+	spaCy - faster, written in Cython and optimized for production use.
+	nltk - slower with large texts.
+
+3. Ease of use -
+	nltk - for beginners and educational purposes
+	spaCy - slightly more complex but more powerful in real-word applications
+
+4. Customization -
+	spaCy - more control and customization over pipelines
+	nltk - more manual effort for custom rules
+
+5. Dependency management -
+	spaCy - downloading separate language models
+	nltk - downloading tokenizers and corpora manually (e.g., punkt)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
