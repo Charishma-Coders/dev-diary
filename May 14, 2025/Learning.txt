@@ -1,0 +1,109 @@
+class Solution {
+public:
+int lengthAfterTransformations(string s, int t) {
+const int MOD=1e9+7;
+// storing the frequency of each character in s
+unordered\_map\<char,int> pq;
+for (auto each\:s){
+pq\[each]++;
+}
+
+```
+    for (int i=0;i<t;i++){
+        unordered_map<char,int> temp;
+        for (auto &it:pq){
+            char ch=it.first;
+            int freq=it.second;
+            if (ch!='z'){
+                temp[ch+1]=(temp[ch+1]+freq)%MOD;
+            }
+            else{
+                temp['a']=(temp['a']+freq)%MOD;
+                temp['b']=(temp['b']+freq)%MOD;
+            }
+        }
+        pq=move(temp);
+    }
+
+    int total=0;
+    for (auto each:pq){
+        total=(total+each.second)%MOD;
+    }
+
+    return total;
+}
+```
+
+};
+
+class Solution {
+public:
+int lengthAfterTransformations(string s, int t) {
+const int MOD=1e9+7;
+// storing the frequency of each character in s
+// unordered\_map\<char,int> pq;
+vector<int> pq(26,0);
+for (auto each\:s){
+pq\[each-'a']++;
+}
+
+```
+    for (int i=0;i<t;i++){
+        // unordered_map<char,int> temp;
+        vector<int> temp(26,0);
+        for (int i=0;i<26;i++){
+            char ch=i+'a';
+            int freq=pq[i];
+            if (ch!='z'){
+                temp[(ch+1)-'a']=(temp[(ch+1)-'a']+freq)%MOD;
+            }
+            else{
+                temp['a'-'a']=(temp['a'-'a']+freq)%MOD;
+                temp['b'-'a']=(temp['b'-'a']+freq)%MOD;
+            }
+        }
+        pq=move(temp);
+    }
+
+    int total=0;
+    for (int i=0;i<26;i++){
+        total=(total+pq[i])%MOD;
+    }
+
+    return total;
+}
+```
+
+};
+
+in 1st case it is only traversing required characters right then time complexity would be lesser right. as compared to 2nd case.?
+
+
+Answer:- 
+second implementation is more efficient in practice and has better time complexity bounds due to:
+
+. Constant-time access in vectors vs potential hash collisions in maps.
+. Fixed loop size (26) in the vector version, making it predictable and compiler-optimized.
+. The overhead of hashing and bucket handling in unordered_map.
+
+🔍 Let's analyze them more deeply:
+1. unordered_map version
+. Only processes characters present in the current state, which can seem efficient if only a few characters are present.
+. unordered_map operations like insert, lookup, and update are average O(1) but have a worse constant factor due to hashing overhead and potential collisions.
+. The number of keys in the map can grow rapidly over iterations due to branching (z → a and b), possibly approaching all 26 characters.
+. So in the worst case, the map will contain all 26 characters, and you'd iterate over them anyway.
+
+2. vector version
+. Always processes all 26 characters, which might feel unnecessary early on.
+. But each access/modification is true O(1) with low overhead, and the loop is tight and optimized.
+. Predictable memory layout and CPU caching make this very fast.
+. No hashing, no dynamic memory allocation.
+
+⏱️ Time Complexity:
+Assume the worst case where all 26 characters become involved during the transformations.
+
+unordered_map version: Time: O(t * k) where k is the number of keys in the map (max 26), but with higher constant factors.
+vector version: Time: O(t * 26) = O(t), with very low constants and tight control.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
