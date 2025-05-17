@@ -1,0 +1,273 @@
+Size of float is 4 bytes
+float values vary from 3.4*10(-38) -> 3.4*10(-38)
+float can store 7 significant digits without loss of precision.
+
+significant digits - before and after decimal points
+		   - Starting from 1st non zero
+
+ex:-
+
+float num=0.000123456;
+cout<<num<<endl; -> 0.000123456
+
+int can store 10 decimal digits 
+int max positive value -> 2,147,483,647
+int min negative value -> -2,147,483,648
+
+double can represent up to 15 to 17 significant digits
+
+in terms of power of 10
+int - -2.15*10(9) to 2.15*10(9)
+long - -9.22*10(18) to 9.22*10(18)
+long long - -9.22*10(18) to 9.22*10(18)
+
+float - 1.2*10(-38) to 3.4*10(38)
+double - 2.2*10(-308) to 1.8*10(308)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: float points upto 2 decimal places?
+
+Answer:-
+
+#include<iomanip> // ---> provides tools for input/output manipulation.
+float var=37.66666
+cout<<fixed<<setprecision(2)<<var<<endl;
+
+output:- 37.67
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+By default, cout displays up to 6 significant digits for floating-point numbers.
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    double num = 123.456789;
+    cout << "Default:           " << num << endl; // 123.457
+    cout << "setprecision(4):   " << setprecision(4) << num << endl; // 123.5
+    cout << "fixed+precision(4):" << fixed << setprecision(4) << num << endl; // 123.4568
+    return 0;
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question:- why in int main() everytime it is int not void?
+
+Answer:-
+
+What does returning int mean?
+	. Returning 0 usually means successful execution.
+	. Returning a non-zero value indicates some error or abnormal termination.
+	. The OS or calling environment can use this exit code to know if the program ran successfully.
+
+Why returning 1 at the end of main() might cause issues?
+	. By convention, main() should return 0 to indicate successful execution.
+	. Returning any non-zero value (like 1) usually signals an error or abnormal termination to the system or grading platform.
+	. Some online judges or automated graders expect return 0; for a successful run — if you return 1, they might interpret it as a failure or runtime error, even if your output is correct.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question:- 
+
+#include<iostream>
+using namespace std;
+int main(){
+    string str="Cherry";
+    cout<<str<<endl;
+}
+
+string data type is from #include<string> in c++
+
+why this works without #include<string>?
+
+Answer:-
+
+🔍 Why does string work without #include <string>?
+You're indirectly pulling in <string> via <iostream>, because:
+	. <iostream> internally includes other headers like <ios>, <ostream>, etc.
+	. These in turn may include <string> — especially in many implementations of the standard library (like GCC, Clang, or MSVC).
+
+So it works only because of this indirect inclusion, not because string is defined in <iostream> itself.
+
+⚠️ Why you should still write #include <string>
+Even though it works now, you should explicitly include <string>: #include<string>
+
+Reasons:
+. Good practice.
+. Prevents issues if future library versions or platforms change internal inclusions.
+. Helps others (and the compiler) know what headers your code actually depends on.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: 
+
+int a;
+string str;
+
+code 1:-
+cin>>a;
+getline(cin,str);
+
+code 2:-
+cin>>a>>str;
+
+input:
+5
+Hello
+
+what's the difference between code 1 and code 2?
+
+Answer:
+
+When you write: cin>>a>>str;
+
+cin automatically skips whitespace, including spaces, tabs, and newlines before reading each input. So even though cin >> a leaves a newline (\n) in the buffer, the next cin >> str skips that newline and moves on to read the next word (like "Hello").
+
+. cin >> a; reads 5, leaves \n
+. cin >> str; skips the \n and reads "Hello"
+
+✅ So: cin >> skips whitespace before reading — that’s why str doesn’t read the newline.
+
+However, getline(cin, str) does not skip whitespace, so it reads the newline immediately if it's still in the buffer — that’s where the common issue arises when mixing cin >> and getline.
+
+In short:
+. cin >> skips whitespace before reading
+. getline() does not skip, so you must clear the buffer with cin.ignore() before using it after cin >>
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Time complexity:- no. of steps which are there in the code * time taken per step
+time taken per step is based on machine so we assume it is constant.
+
+Time complexity:- no of steps which are there in the code
+
+In time complexity analysis, what are the basic operations that are counted?
+Ans:- Arithmetic calculations, assignments, comparision, loops, and conditional statments.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: When analyzing the performance of algorithms, why is the worst-case scenario considered in Big O notation?
+
+Answer: It ensures efficient performance in challenging situations
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Big O - considers worst case (upper bound)
+Theta - considers average case
+Omega - considers best case (lower bound)
+
+When writing and analyzing algorithms, time and space complexity are most commonly considered because they are the two primary resources that directly affect how well an algorithm performs in real-world conditions.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question: In the context of space complexity, what is the difference between "input space" and "auxiliary space"?
+
+Answer: Input space refers to the input size, while auxiliary space refers to the variables created within the algorithm
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STL in C++:
+
+STL -> Standard Template Library
+
+in this we have
+Algorithms -> sort
+Containers -> Array
+iterators ->
+functions ->
+
+									Pair
+int a=2; // a is an object with int data type and 2 as value
+pair is also act as data type/similar to data type where it can store 2 objects of different data type
+pair - #include<utility>
+
+									Vector
+int arr[]={4,5,6}; 
+int arr[3];
+
+. size of array is 3.
+. size can't be changed
+. contiguous manner
+
+vector -> dynamic arrays
+
+. size can be changed.
+. can be increased or decreased.
+. contiguous manner
+
+vector - #include<vector>
+
+push_back vs emplace_back in vector:
+
+| Feature      | `push_back`                                                   | `emplace_back`                                                                               |
+| ------------ | --------------------------------------------------------------| ------------------------------------------------------- |
+| How it works | Takes an object and **copies or moves** it into the container | Constructs the object **in-place** inside the container, directly from 										 constructor arguments |
+| Efficiency   | May involve copying or moving the object                      | Avoids unnecessary copy/move; more efficient especially for complex objects                  |
+| Usage        | You pass a fully constructed object                           | You pass constructor arguments to build the object directly                                 
+
+array:- 1 3 5 7 9
+
+v.begin() -> 1
+v.end() -> after 9
+v.rbegin() -> 9
+v.rend() -> before 1
+
+*(v.rbegin()+1) -> 7
+
+auto - means compiler automatically figure it out what it is
+auto must be used with an initializer because the compiler needs to deduce the type from that initializer.
+
+									Deque
+
+in vector 
+	for inserting at back we have push_back
+	for inserting at front we have insert -> which is costlier in vector
+
+in deque
+	both front and back operations are present
+
+deque - #include<deque>
+
+begin and end -> give iterators
+front and back -> give values
+
+									list
+
+list - #include<list>
+vector - easy back operations
+	 insert costly
+	 can access v[0] v[1];
+
+deque - easy back and front operations
+	insert costly
+	can access d[0] d[1];
+
+list - insert O(1)
+       Doubly linked list
+       can't access l[0] l[1]
+
+									stack
+
+stack - #include<stack>
+
+push, pop, top - time complexity is O(1)
+
+can't access v[0],v[1] in stack
+
+									Queue
+
+push, pop, front, back - O(1) time complexity
+FIFO - First In First Out
+queue - #include<queue>
+
+									Priority Queue
+
+Maximum value will be stored at the top 
+elements are in sorted order 
+uses tree data structure
+priority_queue - #include<queue>
+
+
