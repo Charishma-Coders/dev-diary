@@ -1,0 +1,89 @@
+							Set
+
+2 properties:
+. Sorted
+. unique
+set - #include<set>
+implemented as a balanced binary search tree (usually a Red-Black Tree).
+Time complexity for everything is O(logn)
+
+							Multi set
+multiset - #include<set>
+Implemented as a balanced binary search tree (usually a Red-Black Tree).
+. sorted not unique
+Time complexity of all functions is O(logn) but for erase(iterator) - O(1)
+
+							unordered_set
+unordered_set - #include<unordered_set>
+
+. not sorted (random)
+. unique
+
+Offers faster average lookup, insertion, and deletion compared to std::set.
+A hash-based container (implemented using a hash table).
+
+time complexity of insert and erase mostly take O(1) but very rare case it goes to O(n) (very rare)
+
+							map
+
+map - #include<map>
+map - sorted and unique (red black tree)
+multimap - sorted and X unique (red black tree)
+unordered_map - X sorted and unique (hash table)
+
+map , multi map - for everything O(log n) time complexity
+unordered_map - for everything O(1) time complexity 
+		Worst case occurs when many elements collide into the same bucket and leads to O(n)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if given paragraph and want to read it by words then you have to follow this procedure.
+
+#include <iostream>
+#include <sstream>
+#include <map>
+#include <string>
+using namespace std;
+
+void countWords(map<string, int>& wordCount, const string& paragraph) {
+    istringstream iss(paragraph);  // Create a stream from the paragraph string
+    string word;
+    while (getline(iss, word, ' ')) {  // Split words by space
+        wordCount[word]++;
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+palindrome - no. that reads the same forwards and backwards
+	   - 525 yes
+	   - 123 X
+Harshad - no. that is divisible by the sum of its digits.
+	- 156 yes(1+5+6=12, 156%12==0)
+	- 1292 X(1+2+9+4=14, 1292%14!=0)
+Armstrong - xyz=pow(x,n)+pow(y,n)+pow(z,n)
+	  - 371 yes(3*3*3+7*7*7+1*1*1=371, 371==371)
+	  - 1296 X(1*1*1*1+2*2*2*2+9*9*9*9+6*6*6*6==7874, 7874!=1296)
+Automorphic number - square of a no. ends in same digits as the no. itself.
+		   - 76 yes(76*2==5776, last digits is 76)
+		   - 382 X(382*2==145924, last digits not equal to 382)
+Perfect Number - no. that is equal to the sum of all divisors exclusing the no itself
+	       - 6 yes(1+2+3==6, 6==6)
+	       - 30 X(1+2+3+5+6+10+15==42, 42!=30)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GCD - Greatest Common Divisor
+
+HCF - Highest Common Factor
+
+Recursion vs Backtracking difference
+
+. Recursion: General term for a function calling itself.
+. Backtracking: A form of recursion where decisions are made and undone—used in problems like permutations, combinations, N-Queens, etc.
+. Calling and printing in the same direction → printing during the recursive call.
+. Calling and printing in opposite directions → printing during the return (backtracking) phase.
+
+"In recursion, printing can happen in the call or return phase. In backtracking, printing usually happens during the return phase when undoing choices."
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
