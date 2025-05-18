@@ -234,8 +234,11 @@ deque - #include<deque>
 begin and end -> give iterators
 front and back -> give values
 
+Vectors store data in one big block of memory, but deques use several smaller blocks, making deques better for adding and removing stuff at both ends.
+
 									list
 
+doubly linked list
 list - #include<list>
 vector - easy back operations
 	 insert costly
