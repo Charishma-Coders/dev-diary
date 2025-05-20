@@ -1,0 +1,91 @@
+				Selection Sort
+
+Repeat the steps:-
+1. Select the minimum 
+2. swap it with 1st element in the range
+3. reduce the range / move the range to the right
+
+				Bubble sort
+
+Repeat the steps:-
+1. Push the maximum to the right
+2. swapping adjacent elements
+
+				Insertion sort
+
+Repeat the steps:-
+1. Insert last element in the range in it's correct position
+2. Range '2'
+3. Increase range by '1'
+
+				Merge sort
+
+Divide & Merge
+
+				Quick Sort
+
+1. Select a pivot
+2. Place pivot in correct position in sorted array & create partition at pivot.
+3. Repeat
+
+pivot - 1st element in the array
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Direct and indirect recursion
+
+Answer:-
+
+Direct recursion
+
+void f(){
+	f();
+}
+
+Indirect recursion
+
+void f2(){
+	f1();
+}
+void f1(){
+	f2();
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Tail recursion vs Non-Tail recursion
+
+Answer:-
+
+A function is tail-recursive if the recursive call is the last operation in the function. This means there is nothing left to do after the recursive call returns.
+
+✅ Characteristics:
+. No pending operations after the recursive call.
+. Easier for compilers/interpreters to optimize (via tail call optimization).
+. Uses constant stack space (in languages or compilers that support tail call optimization).
+
+int factorial_tail(int n, int accumulator = 1) {
+    if (n == 0) return accumulator;
+    return factorial_tail(n - 1, n * accumulator); // Tail call — no work after this
+}
+
+
+🔁 Non-Tail Recursion
+A function is non-tail-recursive if the recursive call is not the final action — meaning there's some computation or operation after the call returns.
+
+❌ Characteristics:
+. Has pending operations after the recursive call.
+. Requires more stack space because each call has to wait for the result of the next one.
+. Cannot be optimized with tail call optimization.
+
+int factorial(int n) {
+    if (n == 0) return 1;
+    return n * factorial(n - 1); // Recursive call is not the last thing (we multiply after it returns)
+}
+
+Tail recursion is more efficient (especially for large input sizes) if your language/runtime supports tail call optimization (TCO).
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+str.substr(1) // Geeks -> eeks  --- 1 to end
+
