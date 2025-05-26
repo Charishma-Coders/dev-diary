@@ -1,0 +1,186 @@
+					LangGraph
+
+Dictionary:-
+
+Normal Dictionary:-
+
+movie={"name": "Avengers Endgame", "year": 2019}
+
+. Allows for efficient data retrieval based on unique keys
+. Flexible and easy to implement
+. Leads to challenges in ensuring that the data is a particular structure, especially for larger projects.
+. Doesn't check if the data is the correct type or structure.
+
+Better explanation CHATGPT:-
+
+⚠️ Problem with Normal Dictionary
+user = {
+    "name": "Alice",
+    "age": 25,
+    "email": "alice@example.com"
+}
+
+✅ Looks fine. But what if someone does this?
+user["age"] = "twenty-five"   # wrong type, should be an int
+user["email"] = 12345         # wrong type, should be a string
+user["address"] = True        # unexpected field
+
+Python won’t throw any errors. This means:
+. No way to enforce that age is an integer.
+. No way to stop new, incorrect fields like address being added.
+. Harder to debug or trust the data as the project grows.
+
+This will create lot of logical errors if you are having larger project. The solution is Typed Dictionary
+
+					Typed Dictionary
+
+from typing import TypedDict
+
+class Movie(TypedDict):
+	name: str
+	year: int
+
+movie=Movie(name="Avengers Endgame",year=2019)
+
+. Type safety - we defined explicitly what the data structures are, and reducing runtime errors
+. Enhanced Readability - Makes debugging easier and makes code more understandable
+
+					Union
+
+from typing import Union
+
+def square(x: Union[int,float]) -> float:
+	return x*x;
+
+x=5   # this is fine because it is an integer
+x=1.234 # this is also fine because it is a float
+x="I am a string!" # this will fail because it is a string
+
+. Union lets you say that a value can be more than one type
+. Flexible and easy to code
+. Type safety as it can provide hints to help catch incorrect usage
+
+					Optional
+
+from typing import Optional
+
+def nice_message(name: Optional[str]) -> None:
+	if name is None:
+		print("Hey random person!")
+	else:
+		print(f"Hi there, {name}!")
+
+. In this case "name" can be either String or None!
+. It cannot be anything else
+
+					Any
+
+from typing import Any
+
+def print_value(x: Any):
+	print(x)
+
+print_value("I pretend to be Batman in the shower sometimes")
+
+. Anything and everything is allowed!
+
+					Lambda Function
+
+square = lambda x: x*x
+square(10)
+
+nums=[1,2,3,4]
+squares=list(map(lambda x:x*x,nums))
+
+. Lambda is just a shortcut to writing small functions!
+
+✅ TypedDict, Union, Optional, Any, Lambda — from typing
+These are type annotations in Python, not specific to LangGraph itself — but you can and should use them in LangGraph projects to define types for clarity, validation, and tooling (e.g., autocomplete, linting, mypy).
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+					Elements
+
+Let's look at different elements in LangGraph
+
+-> The State is a shared data structure that holds the current information or context of the entire application.
+-> In simple terms, It is like the application's memory, keeping track of the variables and data that nodes can access and modify as they execute.
+
+Analogy:
+. Whiteboard in a Meeting Room: Participants (nodes) write and read information on the whiteboard (state) to stay updated and coordinate actions.
+
+					Nodes
+
+-> Nodes are individual functions or operations that perform specific tasks within the graph.
+-> Each node receives input (often the current state), processes it, and produces an output or an updated state.
+
+Analogy:
+. Assembly Line Stations: Each station does one job - attach a part, paint it, inspect quality and so on.
+
+					Graph
+
+-> A Graph in LangGraph is the overarching structure that maps out how different tasks(nodes) are connected and executed.
+-> It visually represents the workflow, showing the sequence and conditional paths between various operations.
+
+Analogy:
+
+. Road Map: A road map displaying the different routes connecting cities, with intersections offering choices on which path to take next.
+
+					Edges
+
+-> Edges are the connections between nodes that determine the flow of execution.
+-> They tell us which node should be executed next after the current one completes its task
+
+Analogy:
+. Train Tracks: Each track (edge) connects the stations (nodes) together in a specific direction.
+
+					Conditional Edges
+
+-> Conditional Edges are specialized connections that decide the next node to execute based on specific conditions or logic applied to the current state.
+
+Analogy:
+. Traffic Lights: Green means go one way, red means stop, yellow means slow down. The condition (light color) decides the next step.
+
+					Start
+
+-> The START node is a virtual entry point in LangGraph, marking where the workflow begins.
+-> It doesn't perform any operations itself but serves as the designated starting position for the graph's execution.
+
+Analogy:
+. Race Starting Line: The place where a race officially begins.
+
+					End
+
+-> The END node signifies the conclusion of the workflow in LangGraph
+-> Upon reaching this node, the graph's execution stops, indicating that all intended processes have been completed.
+
+Analogy:
+. Finish Line in a Race: The race is over when you cross it.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+					Tools
+
+-> Tools are specialized functions or utilities that nodes can utilize to perform specific tasks such as fetching data from an API.
+-> They enhance the capabilities of nodes by providing additional functionalities.
+-> Nodes are part of the graph structure, while tools are functionalities used within nodes
+
+Analogy:
+. Tools in a Toolbox: A hammer for nails, a screwdriver for screws, each tool has a distinct purpose.
+
+					ToolNode
+
+-> A ToolNode is just a special kind of node whose main job is to run a tool.
+-> It connects the tool's output back into the State, so other nodes can use that information.
+
+Analogy:
+. Operator Using a Machine: The operator(ToolNode) controls the machine (Tool), then takes the results back to the assembly line.
+
+					StateGraph
+
+-> A StateGraph is a class in LangGraph used to build and compile the graph structure.
+-> It manages the nodes, edges, and the overall state, ensuring that the workflow operates in a unified way and that data flows correctly between components.
+
+Analogy:
+. Blueprint of a Building: Just as a blueprint outlines the design and connections within a building, a StateGraph defines the structure and flow of the workflow.
+
