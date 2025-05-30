@@ -1,0 +1,42 @@
+🎒 Think of a Dict like a school bag:
+You can throw anything in it as long as it's labeled properly.
+
+from typing import Dict
+
+# A bag with labeled items (keys are str, values are int)
+my_bag: Dict[str, int] = {
+    "notebook": 2,
+    "pencil": 3
+}
+
+✅ Keys must be strings (like "notebook")
+✅ Values must be integers (like 2)
+❌ But it doesn’t control which keys must be there.
+
+my_bag = {
+    "apple": 5,
+    "eraser": 1
+}
+
+Still allowed - It's flexible.
+
+🧱 Think of TypedDict like a blueprint or checklist:
+You say: "Every student must carry exactly these items."
+
+from typing import TypedDict
+
+class StudentBag(TypedDict):
+    notebook: int
+    pencil: int
+    eraser: int
+
+# This must follow the exact structure
+bag: StudentBag = {
+    "notebook": 2,
+    "pencil": 3,
+    "eraser": 1
+}
+
+✅ It defines exact required keys
+✅ Each key has a specific type
+❌ If you miss a key or add extra keys, it's an error in static type checking
